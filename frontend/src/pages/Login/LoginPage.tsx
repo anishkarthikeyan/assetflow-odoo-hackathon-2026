@@ -152,9 +152,8 @@ export const LoginPage: React.FC = () => {
             <div className="login-form__new-here">New here?</div>
 
             <div className="login-form__note">
-              Sign up creates an employee account
+              Sign up
               <br />
-              admin roles assigned later
             </div>
 
             {submitError && (

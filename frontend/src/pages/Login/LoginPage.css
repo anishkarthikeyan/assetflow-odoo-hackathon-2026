@@ -397,6 +397,7 @@
 
 .login-form__note {
   padding: 10px 12px;
+  text-align: center;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
   background: #ffffff;
