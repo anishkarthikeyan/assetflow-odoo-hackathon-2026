@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { authService } from '../services/authService';
+import React, { createContext, useState, useEffect } from "react";
+import { authService } from "../services/authService";
 
 interface User {
   id: string;
@@ -18,20 +18,22 @@ interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (token) {
           const userData = await authService.getCurrentUser();
           setUser(userData);
         }
       } catch {
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
       } finally {
         setIsLoading(false);
       }
@@ -42,7 +44,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
     const response = await authService.login({ email, password });
-    localStorage.setItem('token', response.token);
+    localStorage.setItem("token", response.token);
     setUser(response.user);
   };
 
