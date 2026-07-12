@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Eye, EyeOff, Shield } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, Shield } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -87,10 +87,11 @@ export const LoginPage: React.FC = () => {
         </div>
 
         <div className="login-frame__right">
-          <div className="login-frame__header">AssetFlow - login</div>
+          <div className="login-frame__header">Welcome Back</div>
+          <div className="login-frame__subheader">Sign in to AssetFlow</div>
 
           <div className="login-frame__badge" aria-hidden="true">
-            AF
+            <Shield size={30} strokeWidth={2.2} />
           </div>
 
           <form
@@ -100,13 +101,16 @@ export const LoginPage: React.FC = () => {
           >
             <label className="login-form__field">
               <span>Email</span>
-              <input
-                type="email"
-                autoComplete="email"
-                placeholder="name@company.com"
-                aria-invalid={errors.email ? "true" : "false"}
-                {...register("email")}
-              />
+              <div className="login-form__input-wrap">
+                <Mail size={16} />
+                <input
+                  type="email"
+                  autoComplete="email"
+                  placeholder="name@company.com"
+                  aria-invalid={errors.email ? "true" : "false"}
+                  {...register("email")}
+                />
+              </div>
               {errors.email && (
                 <span className="login-form__error">
                   {errors.email.message}
@@ -117,6 +121,7 @@ export const LoginPage: React.FC = () => {
             <label className="login-form__field">
               <span>Password</span>
               <div className="login-form__input-wrap">
+                <Lock size={16} />
                 <input
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
@@ -140,20 +145,30 @@ export const LoginPage: React.FC = () => {
               )}
             </label>
 
-            <button
-              type="button"
-              className="login-form__link-button login-form__link-button--inline"
-            >
-              Forgot password
-            </button>
+            <div className="login-form__row login-form__row--meta">
+              <label className="login-form__remember">
+                <input type="checkbox" />
+                <span>Remember Me</span>
+              </label>
+
+              <button
+                type="button"
+                className="login-form__link-button login-form__link-button--inline"
+              >
+                Forgot Password?
+              </button>
+            </div>
 
             <div className="login-form__divider" />
 
-            <div className="login-form__new-here">New here?</div>
+            <div className="login-form__row login-form__row--stacked">
+              <div className="login-form__new-here">New to AssetFlow?</div>
 
-            <div className="login-form__note">
-              Sign up
-              <br />
+              <div className="login-form__note">
+                Create an employee account.
+                <br />
+                Administrator approval is required before asset access.
+              </div>
             </div>
 
             {submitError && (
@@ -165,12 +180,12 @@ export const LoginPage: React.FC = () => {
               className="login-form__submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Signing in..." : "Create Account"}
+              {isSubmitting ? "Signing In..." : "Sign In"}
             </button>
 
-            <p className="login-page__signup">
-              Don&apos;t have an account? <Link to="/signup">Sign up</Link>
-            </p>
+            <Link to="/signup" className="login-form__create-account">
+              Create Account
+            </Link>
           </form>
         </div>
       </section>
