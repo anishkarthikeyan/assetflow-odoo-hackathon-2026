@@ -5,7 +5,5 @@ interface AuthLayoutProps {
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
-  return (
-    <div className="auth-shell">{children}</div>
-  );
+  return <div className="auth-shell">{children}</div>;
 };
